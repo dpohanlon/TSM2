@@ -10,6 +10,7 @@ private:
     vector<vector<int> > weights;
     vector<int> route;
     int places;
+    long routeLength;
     
 public:
     
@@ -25,9 +26,11 @@ public:
     
     long getRouteSize(void) {return route.size();}
     
+    long getRouteLength(void) {return routeLength;}
+    
     long initweights(int places);
     
-    long routelen(void);
+    void routelen(void);
     
     void exchangeNodes(int routeIndexA, int routeIndexB);
     

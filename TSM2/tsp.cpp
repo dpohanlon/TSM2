@@ -37,16 +37,13 @@ MersenneTwister mt;
      is calculated by the ith iteration, and the final entry should describe a return to the start node, 0.
      For example route = {0, 1, 4, 3, 5, 8, 6, 7, 0} represents travelling from 0 to 1, from 1 to 4, etc. */
     
-    long Tsp::routelen(void)
+    void Tsp::routelen(void)
     {
         int i = 0;
-        long length = 0;
         
         for (i=0; i<route.size()-1; ++i) {
-            length+=weights[route[i]][route[i]+1];
+            routeLength+=weights[route[i]][route[i]+1];
         }
-        
-        return length;
     }
     
     void Tsp::exchangeNodes(int routeIndexA, int routeIndexB)
@@ -55,6 +52,7 @@ MersenneTwister mt;
         route[routeIndexA] = temp;
         route[routeIndexA] = route[routeIndexB];
         route[routeIndexB] = temp;
+        routelen();
     }
     
     void Tsp::fillweights(void)
@@ -76,7 +74,14 @@ MersenneTwister mt;
     {
         int i = 0, j = 0, next = 0;
         int next_weight = 0;
-        const int dumLarge = 999;
+        const unsigned int dumLarge = ~0; // Requires compared vars to also be unsigned
+        vector<vector<int> > workingWeights;
+        
+        /* Make a working copy of weights that we can delete columns in */
+        
+        for (i=0; i<places; ++i) {
+            workingWeights.push_back(weights[i]);
+        }
         
         /* Size of route[] should be places+1, start and end at 0 */
         
@@ -93,15 +98,15 @@ MersenneTwister mt;
                 
                 // Initialise the weight of the next node to a huge number
                 
-                next_weight = dumLarge*places;
+                next_weight = dumLarge;
                 
                 /* For each column (to), if the weight of the transition from the
                  previous node in the route to it is less than the temporary next weight,
                  make this the next weight and the next node */
                 
                 for (j = 0; j < places; ++j) {
-                    if (weights[route[i-1]][j] < next_weight && j!=0) {
-                        next_weight = weights[route[i-1]][j];
+                    if (workingWeights[route[i-1]][j] < next_weight && j!=0) {
+                        next_weight = workingWeights[route[i-1]][j];
                         next = j;
                     }
                 }
@@ -113,9 +118,10 @@ MersenneTwister mt;
                 // Fill column with large so we don't go back
                 
                 for (j = 0; j < places; ++j) {
-                    weights[j][next]=dumLarge*places;
+                    workingWeights[j][next]=dumLarge;
                 }
             }
         }
+        routelen();
     }
 

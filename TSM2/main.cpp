@@ -8,6 +8,7 @@ using namespace std;
 int main (int argc, const char * argv[])
 {
     int i = 0, j = 0;
+    const unsigned int d = ~0;
     
     Tsp tsp(10, true);
     
@@ -31,13 +32,17 @@ int main (int argc, const char * argv[])
         cout << endl;
     }
     
+    cout << "\n" << endl;
+    
     for (i = 0; i < tsp.getPlaces()+1; ++i) {
         cout << tsp.getRoute(i) << ",";
     }
     
     cout << "\n";
 
-    cout << tsp.getRouteSize() << endl;
+    cout << tsp.getRouteSize()<< ", " << tsp.getRouteLength() << endl;
+    
+    cout << d << endl;
     
     return 0;
 }
