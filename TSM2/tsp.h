@@ -32,7 +32,11 @@ public:
     
     void routelen(void);
     
+    long routelen(vector<int> routeIn);
+    
     void exchangeNodes(int routeIndexA, int routeIndexB);
+    
+    void exchangeNodes(vector<int> &routeIn, int routeIndexA, int routeIndexB);
     
     void fillweights(void);
     
