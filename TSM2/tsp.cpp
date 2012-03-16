@@ -26,7 +26,7 @@ Tsp::Tsp(int dumPlaces, bool FillRandom)
 long Tsp::initweights(int places)
 {   
     int i = 0;
-    vector<int> dumvec (places);
+    vector<long> dumvec (places);
     for (i=0; i<places; ++i) {
         weights.push_back(dumvec);
     }
@@ -46,7 +46,7 @@ void Tsp::routelen(void)
     }
 }
 
-long Tsp::routelen(vector<int> routeIn)
+long Tsp::routelen(vector<long> routeIn)
 {
     int i = 0;
     long dumRouteLength = 0;
@@ -59,16 +59,16 @@ long Tsp::routelen(vector<int> routeIn)
 
 void Tsp::exchangeNodes(int routeIndexA, int routeIndexB)
 {
-    int temp = 0;
+    long temp = 0;
     temp = route[routeIndexA];
     route[routeIndexA] = route[routeIndexB];
     route[routeIndexB] = temp;
     routelen();
 }
 
-void Tsp::exchangeNodes(vector<int> &routeIn, int routeIndexA, int routeIndexB)
+void Tsp::exchangeNodes(vector<long> &routeIn, int routeIndexA, int routeIndexB)
 {
-    int temp = 0;
+    long temp = 0;
     temp = routeIn[routeIndexA];
     routeIn[routeIndexA] = routeIn[routeIndexB];
     routeIn[routeIndexB] = temp;
@@ -84,7 +84,7 @@ void Tsp::fillweights(void)
                 weights[i][j] = 100*places;
             }
             else
-                weights[i][j] = mt.random()*100;
+                weights[i][j] = mt.random()*places;
         }
     }
 }
@@ -92,9 +92,9 @@ void Tsp::fillweights(void)
 void Tsp::initRoute(void)
 {
     int i = 0, j = 0, next = 0;
-    unsigned int next_weight = 0; //Unsigned because dumLarge is unsigned
-    vector<vector<int> > workingWeights;
-    const unsigned int dumLarge = ~0;
+    unsigned long next_weight = 0; //Unsigned because dumLarge is unsigned
+    vector<vector<long> > workingWeights;
+    const unsigned long dumLarge = ~0;
     
     /* Make a working copy of weights that we can delete columns in */
     

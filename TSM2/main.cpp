@@ -12,28 +12,28 @@ int main (int argc, const char * argv[])
     
     Tsp tsp(10, true);
     
-    for (i = 0; i < tsp.getPlaces(); ++i) {
-        for (j = 0; j < tsp.getPlaces(); ++j) {
-            cout << tsp.getWeights(i,j) << ",";
-        }
-        cout << endl;
-    }
+//    for (i = 0; i < tsp.getPlaces(); ++i) {
+//        for (j = 0; j < tsp.getPlaces(); ++j) {
+//            cout << tsp.getWeights(i,j) << ",";
+//        }
+//        cout << endl;
+//    }
     
-    cout << "\n";
+//    cout << "\n";
     
     tsp.initRoute();
     
-    cout << "\n" << endl;
+//    cout << "\n" << endl;
     
-    for (i = 0; i < tsp.getPlaces()+1; ++i) {
-        cout << tsp.getRoute(i) << ",";
-    }
+//    for (i = 0; i < tsp.getPlaces()+1; ++i) {
+//        cout << tsp.getRoute(i) << ",";
+//    }
     
-    cout << "\n";
+//    cout << "\n";
 
     cout << tsp.getRouteSize()<< ", " << tsp.getRouteLength() << endl;
     
-    vector<int> dumRoute;
+    vector<long> dumRoute;
     
     for (i=0; i<tsp.getRouteSize(); ++i) {
         dumRoute.push_back(tsp.getRoute(i));
@@ -50,18 +50,18 @@ int main (int argc, const char * argv[])
                     dumLength = tsp.routelen(dumRoute);
                 }
                 else {
-                        dumRoute[i] = tsp.getRoute(i);
-                        dumRoute[j] = tsp.getRoute(j);
+                    dumRoute[i] = tsp.getRoute(i);
+                    dumRoute[j] = tsp.getRoute(j);
                 }
             }            
         }
     }
     
-    for (i = 0; i < tsp.getPlaces()+1; ++i) {
-        cout << dumRoute[i] << ",";
-    }
+//    for (i = 0; i < tsp.getPlaces()+1; ++i) {
+//        cout << dumRoute[i] << ",";
+//    }
     
-    cout << "\n";
+//    cout << "\n";
     
     cout << dumRoute.size()<< ", " << tsp.routelen(dumRoute) << endl;
     

@@ -7,9 +7,9 @@ class Tsp
 {
 private:
     
-    vector<vector<int> > weights;
-    vector<int> route;
-    int places;
+    vector<vector<long> > weights;
+    vector<long> route;
+    long places;
     long routeLength;
     
 public:
@@ -18,11 +18,11 @@ public:
     
     Tsp(int dumPlaces, bool FillRandom);
     
-    int getPlaces(void) {return places;}
+    long getPlaces(void) {return places;}
     
-    int getWeights(int from, int to) {return weights[from][to];}
+    long getWeights(int from, int to) {return weights[from][to];}
     
-    int getRoute(int index) {return route[index];}
+    long getRoute(int index) {return route[index];}
     
     long getRouteSize(void) {return route.size();}
     
@@ -32,11 +32,11 @@ public:
     
     void routelen(void);
     
-    long routelen(vector<int> routeIn);
+    long routelen(vector<long> routeIn);
     
     void exchangeNodes(int routeIndexA, int routeIndexB);
     
-    void exchangeNodes(vector<int> &routeIn, int routeIndexA, int routeIndexB);
+    void exchangeNodes(vector<long> &routeIn, int routeIndexA, int routeIndexB);
     
     void fillweights(void);
     
